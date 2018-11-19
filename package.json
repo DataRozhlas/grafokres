@@ -1,0 +1,30 @@
+{
+  "name": "grafokres",
+  "version": "1.0.0",
+  "description": "",
+  "main": "grafokres.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DataRozhlas/grafokres.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DataRozhlas/grafokres/issues"
+  },
+  "homepage": "https://github.com/DataRozhlas/grafokres#readme",
+  "dependencies": {
+    "d3": "^5.7.0",
+    "d3-jetpack": "^2.0.19",
+    "d3-selection-multi": "^1.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "babel-loader": "^8.0.4",
+    "webpack": "^4.25.1"
+  }
+}
