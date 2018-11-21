@@ -18,7 +18,6 @@
   "homepage": "https://github.com/DataRozhlas/grafokres#readme",
   "dependencies": {
     "d3": "^5.7.0",
-    "d3-jetpack": "^2.0.19",
     "d3-selection-multi": "^1.0.1"
   },
   "devDependencies": {

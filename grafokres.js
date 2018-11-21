@@ -1,10 +1,12 @@
 module.exports = grafokres;
 function grafokres(parameters) {
-	const d3 = require("d3");
+	const d3 = Object.assign({}, require("d3-selection"), require("d3-axis"), require("d3-scale"), require("d3-array"),
+		require("d3-shape"), require("d3-drag"), require("d3-transition"));
 
 	const elem = parameters.elem;
 	const data = parameters.data;
 	const hiddenFrom = parameters.cutoff;
+
 	
 	const width = Math.min(d3.select(elem).node().offsetWidth, 600);
 	const height = 400;
@@ -24,7 +26,7 @@ function grafokres(parameters) {
 
 	const x_axis = d3.axisBottom()
 		.scale(xscale)
-		.ticks()
+		.ticks(window.innerWidth < 600 ? 8 : 10)
 		.tickFormat(x => x);
 
 	const y_axis = d3.axisLeft()
@@ -59,17 +61,16 @@ function grafokres(parameters) {
 		.attr("d", line(data));
 	const yourDataSel = svg.append("path").attr("class","your-line");
 
-	// not refactored
-	var yourData = data
+	const yourData = data
 		.map(d => ({year: d.year, debt: d.debt, defined: 0}) )
 		.filter(function(d){
 			if (d.year == hiddenFrom) d.defined = true;
 			return d.year >= hiddenFrom;
 		});
 
-	var completed = false;
+	let completed = false;
 
-	var drag = d3.drag()
+	const drag = d3.drag()
 		.on("drag", function(){
 
 			if (!completed) {
@@ -86,16 +87,15 @@ function grafokres(parameters) {
 				
 				yourDataSel.attr("d", line.defined(x => x.defined)(yourData));
 			}
-			/*
-			if (!completed && d3.mean(yourData, ƒ("defined")) == 1){
+			
+			if (!completed && (d3.mean(yourData, x => x.defined == 1) === 1)){
 				completed = true;
-				clipRect.transition().duration(1000).attr("width", xscale(2015));
-			}*/
+				clipRect.transition().duration(1000).attr("width", xscale(d3.max(data.map(x => x.year))));
+				//onsole.log(yourData.map(x => Math.round(x.debt*10)/10));
+			}
 		});
 
 	svg.call(drag);
-
-
 
 	function clamp(a, b, c){ return Math.max(a, Math.min(b, c)); }
 }
