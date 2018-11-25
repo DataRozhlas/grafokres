@@ -1,11 +1,13 @@
 const path = require("path");
 
 module.exports = {
-	entry: "./index.js",
+	entry: "./grafokres.js",
 	mode: "production",
 	output: {
 		path: path.resolve(__dirname, "dist"),
-		filename: "bundle.js"
+		filename: "grafokres.js",
+		library: "grafokres",
+		libraryTarget: "umd"
 	},
 	watch: true,
 

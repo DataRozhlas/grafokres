@@ -91,7 +91,7 @@ function grafokres(parameters) {
 			if (!completed && (d3.mean(yourData, x => x.defined == 1) === 1)){
 				completed = true;
 				clipRect.transition().duration(1000).attr("width", xscale(d3.max(data.map(x => x.year))));
-				//onsole.log(yourData.map(x => Math.round(x.debt*10)/10));
+				//console.log(yourData.map(x => Math.round(x.debt*10)/10));
 			}
 		});
 

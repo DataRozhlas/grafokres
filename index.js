@@ -1,5 +1,3 @@
-const grafokres = require("./grafokres.js");
-
 const data = [
 	{"year": 2001,    "debt": 31.4},
 	{"year": 2002,    "debt": 32.6},
