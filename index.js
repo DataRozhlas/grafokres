@@ -127,7 +127,7 @@ grafokres({
 	cutoff: 2008,
 	interval: "year",
 	btnFn: postResult,
-	yFormat: "x + '%'"
+	yFormat: "x + ' %'"
 });
 
 function postResult(btn) {

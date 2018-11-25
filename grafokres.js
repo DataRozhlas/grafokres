@@ -48,6 +48,11 @@ function grafokres(parameters) {
 	svg.append("g")
 		.attr("transform", "translate(0, " + height  +")")
 		.call(x_axis);
+	
+	const valueDisplay = svg.append("g")
+		.attr("class", "valuedisplay")
+		.append("text")
+		.attr("x", xscale(d3.max(data.map(x => x.year))));
 
 	const area = d3.area().x(x => xscale(x.year)+1).y0(x => yscale(x.value)).y1(height);
 	const line = d3.area().x(x => xscale(x.year)+1).y(x => yscale(x.value));
@@ -81,16 +86,23 @@ function grafokres(parameters) {
 	const drag = d3.drag()
 		.on("drag", function(){
 			if (!completed) {
-				var pos = d3.mouse(this);
-				var year = clamp(hiddenFrom + (1 * interval), d3.max(data.map(x => x.year))+1, xscale.invert(pos[0]));
-				var value = clamp(0, yscale.domain()[1], yscale.invert(pos[1]));
+				const pos = d3.mouse(this);
+				const year = clamp(hiddenFrom + (1 * interval), d3.max(data.map(x => x.year))+1, xscale.invert(pos[0]));
+				const value = clamp(0, yscale.domain()[1], yscale.invert(pos[1]));
 				yourData.forEach(function(d){
 					if (Math.abs(d.year/interval - year/interval) < .5){
 						d.value = value;
 						d.defined = true;
 					}
 				});
-				
+
+				const definedData = yourData.filter(x => x.defined === true);
+				const latestDefined = d3.max(definedData.map(x => x.year));
+				const latestValue =  Math.round( (yourData.filter(x => x.year === latestDefined)[0].value * 10) ) / 10;
+				function latestValueFormat (x) {return eval(yFormat);}
+				valueDisplay.text("● " + latestValueFormat(latestValue.toString().replace(".",",")))
+					.attr("y", yscale(latestValue) + 5);
+
 				yourDataSel.attr("d", line.defined(x => x.defined)(yourData));
 			}
 			
