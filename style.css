@@ -1,29 +1,53 @@
-svg{
+.graf svg {
     overflow: visible;
 }
 
-body{
-  font-family: monospace;
-  margin: 0px;
-  overflow: hidden;
-}
-
-.axis{
+.axis {
   opacity: .5;
 }
 
-.line{
+.graf {
+  margin-bottom:10px;
+  margin-top:-40px;
+  max-width: 600px;
+}
+
+.line {
   fill: none;
   stroke: black;
   stroke-width: 3;
 }
 
-.area{
+.area {
   fill: #eee;
 }
 
-.your-line{
+.your-line {
   stroke: #f0f;
   stroke-width: 3;
   stroke-dasharray: 5 5;
+}
+
+.grafbtn {
+  margin: 0 auto;
+  width: 40%;
+  line-height: 2.2em;
+  height: 3em;
+  background-color: #e7e7e7; 
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 20px;
+  margin-top: 80px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 18px;
+  cursor: pointer;
+  transition: opacity .3s;
+}
+
+.disabled {
+  opacity: 0.4;
+  cursor: default;
 }
