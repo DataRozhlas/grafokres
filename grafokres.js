@@ -9,9 +9,11 @@ function grafokres(parameters) {
 	const btnFn = parameters.btnFn;
 	const interval = (parameters.interval == "decade") ? 10 : 1;
 	const yFormat = parameters.yFormat ? parameters.yFormat : "x";
+	const yMin = parameters.yMin ? parameters.yMin : 0;
+	const yMax = parameters.yMax ? parameters.yMax : 100;
 
 	const width = Math.min(d3.select(elem).node().offsetWidth, 600);
-	const height = 400;
+	const height = 300;
 	const svg = d3.select(elem)
 		.append("svg")
 		.attr("width", width)
@@ -29,7 +31,7 @@ function grafokres(parameters) {
 		.range([0, width - 100]);
 
 	const yscale = d3.scaleLinear()
-		.domain([0, 100])
+		.domain([yMin, yMax])
 		.range([height, 0]);
 
 	const x_axis = d3.axisBottom()
@@ -100,6 +102,7 @@ function grafokres(parameters) {
 				const latestDefined = d3.max(definedData.map(x => x.year));
 				const latestValue =  Math.round( (yourData.filter(x => x.year === latestDefined)[0].value * 10) ) / 10;
 				function latestValueFormat (x) {return eval(yFormat);}
+				
 				valueDisplay.text("● " + latestValueFormat(latestValue.toString().replace(".",",")))
 					.attr("y", yscale(latestValue) + 5);
 
