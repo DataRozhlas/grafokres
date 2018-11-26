@@ -11,9 +11,10 @@ function grafokres(parameters) {
 	const yFormat = parameters.yFormat ? parameters.yFormat : "x";
 	const yMin = parameters.yMin ? parameters.yMin : 0;
 	const yMax = parameters.yMax ? parameters.yMax : 100;
+	const precision = (yMax > 100) ? 1 : 10;
 
 	const width = Math.min(d3.select(elem).node().offsetWidth, 600);
-	const height = 300;
+	const height = 250;
 	const svg = d3.select(elem)
 		.append("svg")
 		.attr("width", width)
@@ -100,7 +101,8 @@ function grafokres(parameters) {
 
 				const definedData = yourData.filter(x => x.defined === true);
 				const latestDefined = d3.max(definedData.map(x => x.year));
-				const latestValue =  Math.round( (yourData.filter(x => x.year === latestDefined)[0].value * 10) ) / 10;
+
+				const latestValue =  Math.round( (yourData.filter(x => x.year === latestDefined)[0].value * precision) ) / precision;
 				function latestValueFormat (x) {return eval(yFormat);}
 				
 				valueDisplay.text("● " + latestValueFormat(latestValue.toString().replace(".",",")))
@@ -111,7 +113,7 @@ function grafokres(parameters) {
 			
 			if (!completed && (d3.mean(yourData, x => x.defined == 1) === 1)){
 				btn.attr("class","grafbtn")	
-					.attr("data-entered", yourData.map(x => Math.round(x.value*10)/10));
+					.attr("data-entered", yourData.map(x => Math.round(x.value*precision)/precision));
 			}
 		});
 
