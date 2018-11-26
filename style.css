@@ -28,6 +28,11 @@
   stroke-dasharray: 5 5;
 }
 
+.introtext, .valuedisplay {
+  font-family: sans-serif;
+  font-size: small;
+}
+
 .grafbtn {
   margin: 0 auto;
   width: 40%;

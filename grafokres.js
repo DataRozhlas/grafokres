@@ -57,6 +57,21 @@ function grafokres(parameters) {
 		.append("text")
 		.attr("x", xscale(d3.max(data.map(x => x.year))));
 
+	const introText = svg.append("g")
+		.attr("class","introtext")
+		.append("text")
+		.attr("y", height/2)
+		.attr("text-anchor","middle");
+
+	introText.append("tspan")
+		.attr("x", width - 100 - (width - xscale(hiddenFrom) + 1)/4)
+		.text("Sem nakreslete");
+	
+	introText.append("tspan")
+		.attr("x", width - 100 - (width - xscale(hiddenFrom) + 1)/4)
+		.attr("dy", "18")
+		.text("svůj odhad");
+	
 	const area = d3.area().x(x => xscale(x.year)+1).y0(x => yscale(x.value)).y1(height);
 	const line = d3.area().x(x => xscale(x.year)+1).y(x => yscale(x.value));
 
@@ -88,6 +103,8 @@ function grafokres(parameters) {
 
 	const drag = d3.drag()
 		.on("drag", function(){
+			introText.style("display","none");
+
 			if (!completed) {
 				const pos = d3.mouse(this);
 				const year = clamp(hiddenFrom + (1 * interval), d3.max(data.map(x => x.year))+1, xscale.invert(pos[0]));
