@@ -17,8 +17,7 @@ function grafokres(parameters) {
 	const svg = d3.select(elem)
 		.append("svg")
 		.attr("width", width)
-		.attr("height", height)
-		.attr("transform", "translate(50,50)");
+		.attr("height", height);
 
 	const btn = d3.select(elem)
 		.append("button")
