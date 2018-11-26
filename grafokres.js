@@ -36,7 +36,7 @@ function grafokres(parameters) {
 
 	const x_axis = d3.axisBottom()
 		.scale(xscale)
-		.ticks(window.innerWidth < 600 ? 8 : 10)
+		.ticks((window.innerWidth < 600) ? 5 : 10)
 		.tickFormat(x => x);
 
 	const y_axis = d3.axisLeft()
