@@ -70,7 +70,7 @@ function grafokres(parameters) {
 	introText.append("tspan")
 		.attr("x", width - 100 - (width - xscale(hiddenFrom) + 1)/4)
 		.attr("dy", "18")
-		.text("svůj odhad");
+		.text("svůj odhad.");
 	
 	const area = d3.area().x(x => xscale(x.year)+1).y0(x => yscale(x.value)).y1(height);
 	const line = d3.area().x(x => xscale(x.year)+1).y(x => yscale(x.value));
