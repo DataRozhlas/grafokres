@@ -17,13 +17,14 @@
   },
   "homepage": "https://github.com/DataRozhlas/grafokres#readme",
   "dependencies": {
-    "d3": "^5.7.0",
+    "d3": "^5.12.0",
+    "d3-selection": "^1.4.0",
     "d3-selection-multi": "^1.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.6",
-    "@babel/preset-env": "^7.1.6",
-    "babel-loader": "^8.0.4",
-    "webpack": "^4.25.1"
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.41.2"
   }
 }
